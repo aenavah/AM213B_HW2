@@ -32,7 +32,7 @@ def BDF3_boundary(theta):
   return y
 plot_boundary(BDF3_boundary)
 plt.title("BDF3 Absolute Stability Region")
-#plt.show()
+plt.savefig("BDF_Absolute_Stability_Region.jpg")
 
 '''
 Question 1c

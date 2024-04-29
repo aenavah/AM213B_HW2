@@ -31,7 +31,8 @@ def find_deltatstar(matrix, method, method_name):
   plot_boundary(method)
 
   #iterating through delta_ts 
-  for delta_t in np.arange(1, 0, -10**(-5)):
+  tolerance = -10**(-4)
+  for delta_t in np.arange(1, 0, tolerance):
 
     lambda_scaled_reals = []
     lambda_scaled_imags = []
@@ -62,7 +63,7 @@ def find_deltatstar(matrix, method, method_name):
       plt.scatter(lambda_scaled_reals, lambda_scaled_imags, marker = "o", color = "red", facecolors = "none", label = "Eigenvalues")
       plt.legend()
       plt.title(method_name + " with delta_t = " + str(delta_t) )
-      plt.show()
+      plt.savefig("scaled_eigenvalues_tol=" + str(tolerance) + ".jpg")
       return delta_t
 
 def f(A, y):
@@ -100,6 +101,8 @@ def RK3_absolute_stability_region(A, b, h):
       boundary = RK3_S(A, b, h, real_v[x_i, y_i], imag_v[x_i, y_i])
       S_grid[x_i, y_i] = boundary 
 
+  plt.xlabel("Re(z)")
+  plt.ylabel("Im(z)")
   plt.contour(real_v, imag_v, S_grid, [1])
   plt.grid()
   plt.title("Boundary of RK3 Method")
